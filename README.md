@@ -70,7 +70,7 @@ By design, the [Jenkins JCasC Default Schema](default-jenkins-schema.json) is op
     }
 ```
 
-# Example 2: Custom Schema (Strict Enforcement)
+## Custom Schema (Strict Enforcement)
 
 A custom schema can enforce strict rules, allowing validation to fail-fast. For instance, it can restrict proxy ports to a known set (e.g., 3128, 8080) and validate URL patterns.
 
@@ -90,6 +90,135 @@ A custom schema can enforce strict rules, allowing validation to fail-fast. For 
       "type": "string",
       "pattern": "^https?:\\/\\/(?!-)(?:[A-Za-z0-9-]{1,63}\\.)+[A-Za-z0-9-]{2,63}$"
     }
+```
+
+# Example 2: Jenkins JCasC Default Schema (Permissive) RBAC
+
+OneOfMany AuthorizationStrategy are allowed.
+
+```json
+  "hudson.security.AuthorizationStrategy": {
+            "oneOf": [
+                {
+                    "required": [
+                        "cloudBeesRoleBasedAccessControl"
+                    ]
+                },
+                {
+                    "required": [
+                        "legacy"
+                    ]
+                },
+                {
+                    "required": [
+                        "loggedInUsersCanDoAnything"
+                    ]
+                },
+                {
+                    "required": [
+                        "unsecured"
+                    ]
+                }
+            ],
+            "additionalProperties": false,
+            "maxProperties": 1,
+            "type": "object",
+            "properties": {
+                "cloudBeesRoleBasedAccessControl": {
+                    "$ref": "#/definitions/nectar.plugins.rbac.strategy.RoleMatrixAuthorizationStrategyImpl"
+                },
+                "legacy": {
+                    "$ref": "#/definitions/hudson.security.LegacyAuthorizationStrategy"
+                },
+                "loggedInUsersCanDoAnything": {
+                    "$ref": "#/definitions/hudson.security.FullControlOnceLoggedInAuthorizationStrategy"
+                },
+                "unsecured": {
+                    "$ref": "#/definitions/hudson.security.AuthorizationStrategy$Unsecured"
+                }
+            },
+            "minProperties": 1
+        },
+```
+
+## Custom Schema (Strict Enforcement)
+
+Enforce RBAC authorization strategy
+
+```json
+    "jenkins": {
+      "type": "object",
+      "properties": {
+        "authorizationStrategy": {
+          "type": "string",
+          "const": "cloudBeesRoleBasedAccessControl"
+        },
+```
+
+# Example 3: SSH Host Key Verification Strategy - Default Schema (Permissive)
+
+```json
+    "sshHostKeyVerificationStrategy": {
+        "oneOf": [
+            {
+                "required": [
+                    "noHostKeyVerificationStrategy"
+                ]
+            },
+            {
+                "required": [
+                    "manuallyProvidedKeyVerificationStrategy"
+                ]
+            },
+            {
+                "required": [
+                    "acceptFirstConnectionStrategy"
+                ]
+            },
+            {
+                "required": [
+                    "knownHostsFileVerificationStrategy"
+                ]
+            }
+        ],
+        "additionalProperties": false,
+        "maxProperties": 1,
+        "type": "object",
+        "properties": {
+            "noHostKeyVerificationStrategy": {
+                "$ref": "#/definitions/org.jenkinsci.plugins.gitclient.verifier.NoHostKeyVerificationStrategy"
+            },
+            "manuallyProvidedKeyVerificationStrategy": {
+                "$ref": "#/definitions/org.jenkinsci.plugins.gitclient.verifier.ManuallyProvidedKeyVerificationStrategy"
+            },
+            "acceptFirstConnectionStrategy": {
+                "$ref": "#/definitions/org.jenkinsci.plugins.gitclient.verifier.AcceptFirstConnectionStrategy"
+            },
+            "knownHostsFileVerificationStrategy": {
+                "$ref": "#/definitions/org.jenkinsci.plugins.gitclient.verifier.KnownHostsFileVerificationStrategy"
+            }
+        },
+        "minProperties": 1
+    },
+```
+
+## Custom Schema (Strict Enforcement)
+
+Enforce RBAC authorization strategy
+
+```json
+        "gitHostKeyVerificationConfiguration": {
+          "type": "object",
+          "properties": {
+            "sshHostKeyVerificationStrategy": {
+              "type": "string",
+              "const": "knownHostsFileVerificationStrategy"
+            }
+          },
+          "required": [
+            "sshHostKeyVerificationStrategy"
+          ]
+        },
 ```
 
 # Static validation
