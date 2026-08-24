@@ -1,3 +1,36 @@
+# About
+
+This repo is a small toolkit for generating a custom JSON Schema from a Jenkins CasC (`jenkins.yaml`) bundle and using it to demonstrate/validate policy enforcement that the default Jenkins schema can't provide (see the next chapter).
+
+Files in this repo:
+
+* **`default-jenkins-schema.json`** — the full, auto-generated default JCasC JSON Schema (referenced throughout this README as "the default schema").
+* **`jenkins.yaml`** — a sample CasC bundle used as the input/test fixture for schema generation and validation.
+* **`Dockerfile`** — builds the toolset image (UBI9 base) with `python3.11`, `genson` (schema generation from JSON/YAML), `check-jsonschema` (schema validation), `jq`, and `yq` installed.
+* **`docker-build.sh`** — builds the multi-arch toolset image with `docker buildx` (defaults to `caternberg/casc-schema-tools:arm64`).
+* **`test.sh`** — an end-to-end demo script (see below).
+
+How to run it:
+
+1. Build the image (or let `test.sh` do it for you):
+
+   ```
+   ./docker-build.sh [image-name]
+   ```
+
+2. Run the demo:
+
+   ```
+   ./test.sh [image-name]
+   ```
+
+   `test.sh` will:
+   * build the toolset image,
+   * generate `custom-jenkins-schema.json` from `jenkins.yaml` via `yq`/`genson`,
+   * patch that schema with `jq` to add a `const: "cloudBeesRoleBasedAccessControl"` constraint on `jenkins.authorizationStrategy` (an example of the policy enforcement the default schema can't express),
+   * validate `jenkins.yaml` against the patched schema (expected to **pass**),
+   * mutate a copy of `jenkins.yaml` so `authorizationStrategy` is set to an invalid value, and validate that copy against the patched schema (expected to **fail**), proving the constraint is actually enforced.
+
 # Why the Default Jenkins JCasC Schema Can't Enforce Policy
 
 The [default schema](default-jenkins-schema.json) is auto-generated from Jenkins core and plugin Java classes. It validates that a CasC YAML file is *structurally valid* (right types, right shape) — it does not, and structurally cannot, validate that a configuration meets a company's security policy. Two concrete examples from the file itself:
@@ -22,7 +55,7 @@ This is by design: the default schema mirrors the full, permissive API surface o
 
 # Example 1: Jenkins JCasC Default Schema (Permissive)
 
-By design, the [Jenkins JCasC Default Schema](casc-cb-default-schema/jenkins.json) is open and lacks strict enforcement for many fields. For example, it might not enforce specific proxy ports or URL formats. A bundle with an invalid port might pass static validation but cause the Jenkins instance to fail or log warnings at runtime.
+By design, the [Jenkins JCasC Default Schema](default-jenkins-schema.json) is open and lacks strict enforcement for many fields. For example, it might not enforce specific proxy ports or URL formats. A bundle with an invalid port might pass static validation but cause the Jenkins instance to fail or log warnings at runtime.
 
 ```json
 "proxy": {
@@ -39,7 +72,7 @@ By design, the [Jenkins JCasC Default Schema](casc-cb-default-schema/jenkins.jso
 
 # Example 2: Custom Schema (Strict Enforcement)
 
-A [customized schema](casc-cb-custom-schema/jenkins.json) can enforce strict rules, allowing validation to fail-fast. For instance, it can restrict proxy ports to a known set (e.g., 3128, 8080) and validate URL patterns.
+A custom schema can enforce strict rules, allowing validation to fail-fast. For instance, it can restrict proxy ports to a known set (e.g., 3128, 8080) and validate URL patterns.
 
 ```json
 "proxy": {
