@@ -7,8 +7,6 @@ The [default schema](default-jenkins-schema.json) is auto-generated from Jenkins
 
 This is by design: the default schema mirrors the full, permissive API surface of Jenkins so any legitimate configuration validates. It has no concept of organizational policy — mandatory fields, restricted enums, or "this option is disallowed" — so it cannot fail a bundle for using an insecure-but-technically-valid setting. Enforcing rules like "an `authorizationStrategy` is required" or "only `knownHostsFileVerificationStrategy` is allowed" requires a curated custom schema (see below) with `required`, `enum`, and narrowed `oneOf`/`additionalProperties: false` constraints layered on top.
 
-# CasC custom Scheam
-
 # Jenkins CasC Schema Comparison
 
 | Feature | Default Schema (`casc-cb-default-schema/jenkins.json`) | Custom Schema (`casc-controller-custom-schema/jenkins-schema.json`) |
