@@ -35,6 +35,22 @@ How to run it:
    * validate `jenkins.yaml` against the patched schema (expected to **pass**),
    * mutate a copy of `jenkins.yaml` so `authorizationStrategy` is set to an invalid value, and validate that copy against the patched schema (expected to **fail**), proving the constraint is actually enforced.
 
+## Pre-commit validation hook
+
+[`.githooks/pre-commit`](.githooks/pre-commit) runs the same schema validation locally before a commit is created, so a bundle that violates policy never gets committed:
+
+```
+docker run --rm -v $(pwd):/work $IMAGE check-jsonschema --schemafile custom-jenkins-schema.json ./jenkins.yaml
+```
+
+It only runs when `jenkins.yaml` or `custom-jenkins-schema.json` is staged, and skips (rather than fails) if Docker isn't installed. Enable it once per clone (git doesn't version `.git/hooks`, so hooks live in the tracked `.githooks/` directory instead and must be pointed to explicitly):
+
+```
+git config core.hooksPath .githooks
+```
+
+`custom-jenkins-schema.json` must exist before committing — run `./test.sh` (or the `genson`/`jq` steps inside it) to (re)generate it after changing policy constraints. Override the image with `IMAGE=<name> git commit ...` if you're not using the default `caternberg/casc-schema-tools:arm64`.
+
 # Why the Default Jenkins JCasC Schema Can't Enforce Policy
 
 The [default schema](default-jenkins-schema.json) is auto-generated from Jenkins core and plugin Java classes. It validates that a CasC YAML file is *structurally valid* (right types, right shape) — it does not, and structurally cannot, validate that a configuration meets a company's security policy. Two concrete examples from the file itself:

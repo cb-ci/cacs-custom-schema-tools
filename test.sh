@@ -4,7 +4,7 @@ IMAGE=${1:-caternberg/casc-schema-tools:arm64}
 
 echo "===================================================="
 echo  "Docker build"
-./docker-build.sh $IMAGE
+#./docker-build.sh $IMAGE
 
 echo "===================================================="
 echo  "Generate custom Schema"
@@ -37,4 +37,31 @@ docker run --rm -v $(pwd):/work $IMAGE check-jsonschema --schemafile custom-jenk
 
 #echo "validate against default schema"
 #docker run --rm -v $(pwd):/work $IMAGE check-jsonschema --schemafile default-jenkins-schema.json ./jenkins.yaml
+
+echo "===================================================="
+echo "Test: pre-commit hook blocks a commit of the invalid bundle"
+
+git config core.hooksPath .githooks
+
+# Stage the invalid bundle (jenkins-wrong-auth.yaml) as jenkins.yaml, the file
+# the pre-commit hook actually validates, then try to commit it.
+cp jenkins-wrong-auth.yaml jenkins.yaml
+git add jenkins.yaml
+
+COMMIT_OUTPUT=$(git commit -m "test: invalid authorizationStrategy (should be blocked)" 2>&1)
+COMMIT_STATUS=$?
+echo "$COMMIT_OUTPUT"
+
+if [ $COMMIT_STATUS -eq 0 ]; then
+    echo "FAIL: pre-commit hook did NOT block the invalid jenkins.yaml"
+    git reset --soft HEAD~1
+elif echo "$COMMIT_OUTPUT" | grep -q "commit aborted"; then
+    echo "PASS: pre-commit hook correctly blocked the invalid jenkins.yaml"
+else
+    echo "FAIL: commit was blocked, but not by the pre-commit hook (see output above)"
+fi
+
+# Clean up: unstage and restore the original, valid jenkins.yaml
+git restore --staged jenkins.yaml 2>/dev/null || git reset HEAD -- jenkins.yaml
+git checkout -- jenkins.yaml
 
