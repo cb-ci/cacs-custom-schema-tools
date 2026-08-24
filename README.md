@@ -7,7 +7,7 @@ Note: The sample scripts are just implemented for `jenkins.yaml`, however, the a
 Files in this repo:
 
 | File | Description |
-|------|-------------|
+| ------ | ------------- |
 | `default-jenkins-schema.json` | The full, auto-generated default JCasC JSON Schema (referenced throughout this README as "the default schema"). |
 | `jenkins.yaml` | A sample CasC bundle used as the input/test fixture for schema generation and validation. |
 | `Dockerfile` | Builds the toolset image (UBI9 base) with `python3.11`, `genson` (schema generation from JSON/YAML), `check-jsonschema` (schema validation), `jq`, and `yq` installed. |
@@ -57,7 +57,7 @@ This is by design: the default schema mirrors the full, permissive API surface o
 | **Validation Detail** | **Internal References:** Uses `$id` to point to deep internal Jenkins definitions (`#/definitions/...`). | **Explicit Patterns:** Uses standard JSON Schema validation and custom regex `pattern` fields for input validation (e.g., `proxy.testUrl`). |
 | **Plugin Coverage** | **Global:** Validates hundreds of plugin-specific settings within the `unclassified` section. | **Selective:** Only provides validation for a specific subset of plugins (e.g., `email-ext`, `gitHubPluginConfig`). |
 
-# Example 1: Jenkins JCasC Default Schema (Permissive)
+# Example 1: Proxy Settings: Jenkins JCasC Default Schema (Permissive)
 
 By design, the [Jenkins JCasC Default Schema](default-jenkins-schema.json) is open and lacks strict enforcement for many fields. For example, it might not enforce specific proxy ports or URL formats. A bundle with an invalid port might pass static validation but cause the Jenkins instance to fail or log warnings at runtime.
 
@@ -96,7 +96,7 @@ A custom schema can enforce strict rules, allowing validation to fail-fast. For 
     }
 ```
 
-# Example 2: Jenkins JCasC Default Schema (Permissive) RBAC
+# Example 2: RBAC Authorisation: Jenkins JCasC Default Schema (Permissive)
 
 OneOfMany AuthorizationStrategy are allowed.
 
