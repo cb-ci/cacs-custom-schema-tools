@@ -2,15 +2,17 @@
 
 This repo is a small toolkit for generating a custom JSON Schema from a Jenkins CasC (`jenkins.yaml`) bundle and using it to demonstrate/validate policy enforcement that the default Jenkins schema can't provide (see the next chapter).
 
-Note: The sample scripts are just implemented for jenkins.yaml, however, the aproach is the same for `items.yaml`, `plugins.yaml`, `rbac.yaml` (see schemas below)
+Note: The sample scripts are just implemented for `jenkins.yaml`, however, the aproach can also be utilised for `items.yaml`, `plugins.yaml`, `rbac.yaml` (see schemas below)
 
 Files in this repo:
 
-* **`default-jenkins-schema.json`** — the full, auto-generated default JCasC JSON Schema (referenced throughout this README as "the default schema").
-* **`jenkins.yaml`** — a sample CasC bundle used as the input/test fixture for schema generation and validation.
-* **`Dockerfile`** — builds the toolset image (UBI9 base) with `python3.11`, `genson` (schema generation from JSON/YAML), `check-jsonschema` (schema validation), `jq`, and `yq` installed.
-* **`docker-build.sh`** — builds the multi-arch toolset image with `docker buildx` (defaults to `caternberg/casc-schema-tools:arm64`).
-* **`test.sh`** — an end-to-end demo script (see below).
+| File | Description |
+|------|-------------|
+| `default-jenkins-schema.json` | The full, auto-generated default JCasC JSON Schema (referenced throughout this README as "the default schema"). |
+| `jenkins.yaml` | A sample CasC bundle used as the input/test fixture for schema generation and validation. |
+| `Dockerfile` | Builds the toolset image (UBI9 base) with `python3.11`, `genson` (schema generation from JSON/YAML), `check-jsonschema` (schema validation), `jq`, and `yq` installed. |
+| `docker-build.sh` | Builds the multi-arch toolset image with `docker buildx` (defaults to `caternberg/casc-schema-tools:arm64`). |
+| `test.sh` | An end-to-end demo script (see below). |
 
 How to run it:
 
