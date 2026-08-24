@@ -2,6 +2,8 @@
 
 This repo is a small toolkit for generating a custom JSON Schema from a Jenkins CasC (`jenkins.yaml`) bundle and using it to demonstrate/validate policy enforcement that the default Jenkins schema can't provide (see the next chapter).
 
+Note: The sample scripts are just implemented for jenkins.yaml, however, the sense is the same for `items.yaml`, `plugins.yaml`, `rbac.yaml` (see schemas below)
+
 Files in this repo:
 
 * **`default-jenkins-schema.json`** — the full, auto-generated default JCasC JSON Schema (referenced throughout this README as "the default schema").
