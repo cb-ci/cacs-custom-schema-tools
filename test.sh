@@ -4,7 +4,7 @@ IMAGE=${1:-caternberg/casc-schema-tools:arm64}
 
 echo "===================================================="
 echo  "Docker build"
-#./docker-build.sh $IMAGE
+./docker-build.sh $IMAGE
 
 echo "===================================================="
 echo  "Generate custom Schema"
