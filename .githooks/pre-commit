@@ -1,0 +1,32 @@
+#!/bin/bash
+# Pre-commit hook: validate jenkins.yaml against the custom JSON Schema.
+#
+# Enable once per clone with:
+#   git config core.hooksPath .githooks
+set -euo pipefail
+
+IMAGE=${IMAGE:-caternberg/casc-schema-tools:arm64}
+SCHEMA_FILE="custom-jenkins-schema.json"
+BUNDLE_FILE="jenkins.yaml"
+
+# Only run when the bundle or its schema is part of this commit.
+if ! git diff --cached --name-only | grep -qE "^(${BUNDLE_FILE}|${SCHEMA_FILE})$"; then
+    exit 0
+fi
+
+if ! command -v docker >/dev/null 2>&1; then
+    echo "pre-commit: docker not found, skipping CasC schema validation" >&2
+    exit 0
+fi
+
+if [ ! -f "${SCHEMA_FILE}" ]; then
+    echo "pre-commit: ${SCHEMA_FILE} not found. Run ./test.sh to generate it first." >&2
+    exit 1
+fi
+
+echo "pre-commit: validating ${BUNDLE_FILE} against ${SCHEMA_FILE}..."
+
+if ! docker run --rm -v "$(pwd)":/work "${IMAGE}" check-jsonschema --schemafile "${SCHEMA_FILE}" "./${BUNDLE_FILE}"; then
+    echo "pre-commit: ${BUNDLE_FILE} failed schema validation, commit aborted." >&2
+    exit 1
+fi
