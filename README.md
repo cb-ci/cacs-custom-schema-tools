@@ -59,10 +59,6 @@ A [customized schema](casc-cb-custom-schema/jenkins.json) can enforce strict rul
     }
 ```
 
-# Default architecture and docs
-
-* <https://docs.cloudbees.com/docs/cloudbees-ci/latest/casc-controller/set-up-managed-controller-with-service>
-
 # Static validation
 
 CloudBees Specific json schemas
