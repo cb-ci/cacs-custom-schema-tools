@@ -24,11 +24,11 @@ echo "===================================================="
 echo  "validate against custom schema - unexpected value for authorizationStrategy"
 
 # Workaround: fix yaml indent
-TMP_DIR=$(mktemp -d)
-OUTPUT_FILE=$TMP_DIR/"tmp-jenkins-patched.yaml"
-# Copy the original to modify
-cp -f jenkins.yaml $OUTPUT_FILE
-yq e --indent=2 --no-colors '.' "$OUTPUT_FILE" > tmp.yaml && mv tmp.yaml "jenkins.yaml"
+# TMP_DIR=$(mktemp -d)
+# OUTPUT_FILE=$TMP_DIR/"tmp-jenkins-patched.yaml"
+# # Copy the original to modify
+# cp -f jenkins.yaml $OUTPUT_FILE
+# yq e --indent=2 --no-colors '.' "$OUTPUT_FILE" > tmp.yaml && mv tmp.yaml "jenkins.yaml"
 # END Workaround: fix yaml indent
 
 yq '.jenkins.authorizationStrategy = "somethingelse"' jenkins.yaml > jenkins-wrong-auth.yaml

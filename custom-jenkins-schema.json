@@ -1,0 +1,1175 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "properties": {
+    "configuration-as-code": {
+      "type": "object"
+    },
+    "credentials": {
+      "type": "object",
+      "properties": {
+        "cloudbeesHashicorpVault": {
+          "type": "object"
+        },
+        "folder": {
+          "type": "object"
+        },
+        "operationsCenter": {
+          "type": "object"
+        },
+        "providerImpl": {
+          "type": "object"
+        },
+        "system": {
+          "type": "object",
+          "properties": {
+            "domainCredentials": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "domain": {
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "domain"
+                ]
+              }
+            }
+          },
+          "required": [
+            "domainCredentials"
+          ]
+        },
+        "user": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "cloudbeesHashicorpVault",
+        "folder",
+        "operationsCenter",
+        "providerImpl",
+        "system",
+        "user"
+      ]
+    },
+    "jenkins": {
+      "type": "object",
+      "properties": {
+        "authorizationStrategy": {
+          "type": "string",
+          "const": "cloudBeesRoleBasedAccessControl"
+        },
+        "crumbIssuer": {
+          "type": "string"
+        },
+        "disableRememberMe": {
+          "type": "boolean"
+        },
+        "labelAtoms": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "name"
+            ]
+          }
+        },
+        "log": {
+          "type": "object"
+        },
+        "markupFormatter": {
+          "type": "string"
+        },
+        "mode": {
+          "type": "string"
+        },
+        "noUsageStatistics": {
+          "type": "boolean"
+        },
+        "nodeMonitors": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "diskSpace": {
+                    "type": "object",
+                    "properties": {
+                      "freeSpaceThreshold": {
+                        "type": "string"
+                      },
+                      "freeSpaceWarningThreshold": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "freeSpaceThreshold",
+                      "freeSpaceWarningThreshold"
+                    ]
+                  },
+                  "tmpSpace": {
+                    "type": "object",
+                    "properties": {
+                      "freeSpaceThreshold": {
+                        "type": "string"
+                      },
+                      "freeSpaceWarningThreshold": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "freeSpaceThreshold",
+                      "freeSpaceWarningThreshold"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "numExecutors": {
+          "type": "integer"
+        },
+        "primaryView": {
+          "type": "object",
+          "properties": {
+            "all": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name"
+              ]
+            }
+          },
+          "required": [
+            "all"
+          ]
+        },
+        "projectNamingStrategy": {
+          "type": "string"
+        },
+        "quietPeriod": {
+          "type": "integer"
+        },
+        "remotingSecurity": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "enabled"
+          ]
+        },
+        "scmCheckoutRetryCount": {
+          "type": "integer"
+        },
+        "securityRealm": {
+          "type": "string"
+        },
+        "slaveAgentPort": {
+          "type": "integer"
+        },
+        "systemMessage": {
+          "type": "string"
+        },
+        "updateCenter": {
+          "type": "object",
+          "properties": {
+            "sites": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "url"
+                ]
+              }
+            }
+          },
+          "required": [
+            "sites"
+          ]
+        },
+        "views": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "all": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            },
+            "required": [
+              "all"
+            ]
+          }
+        },
+        "viewsTabBar": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "authorizationStrategy",
+        "crumbIssuer",
+        "disableRememberMe",
+        "labelAtoms",
+        "log",
+        "markupFormatter",
+        "mode",
+        "noUsageStatistics",
+        "nodeMonitors",
+        "numExecutors",
+        "primaryView",
+        "projectNamingStrategy",
+        "quietPeriod",
+        "remotingSecurity",
+        "scmCheckoutRetryCount",
+        "securityRealm",
+        "slaveAgentPort",
+        "systemMessage",
+        "updateCenter",
+        "views",
+        "viewsTabBar"
+      ]
+    },
+    "cloudbees-monitoring": {
+      "type": "object"
+    },
+    "advisor": {
+      "type": "object"
+    },
+    "beekeeper": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "securityWarnings": {
+          "type": "object",
+          "properties": {
+            "enabledForCore": {
+              "type": "boolean"
+            },
+            "enabledForPlugins": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "enabledForCore",
+            "enabledForPlugins"
+          ]
+        },
+        "upgrades": {
+          "type": "object",
+          "properties": {
+            "autoDowngradePlugins": {
+              "type": "boolean"
+            },
+            "autoUpgradePlugins": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "autoDowngradePlugins",
+            "autoUpgradePlugins"
+          ]
+        }
+      },
+      "required": [
+        "enabled",
+        "securityWarnings",
+        "upgrades"
+      ]
+    },
+    "globalCloudBeesPipelineTemplateCatalog": {
+      "type": "object"
+    },
+    "kube": {
+      "type": "object",
+      "properties": {
+        "podTemplatesConfiguration": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "podTemplatesConfiguration"
+      ]
+    },
+    "support": {
+      "type": "object",
+      "properties": {
+        "automatedBundleConfiguration": {
+          "type": "object",
+          "properties": {
+            "componentIds": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "enabled": {
+              "type": "boolean"
+            },
+            "period": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "componentIds",
+            "enabled",
+            "period"
+          ]
+        }
+      },
+      "required": [
+        "automatedBundleConfiguration"
+      ]
+    },
+    "globalCredentialsConfiguration": {
+      "type": "object",
+      "properties": {
+        "configuration": {
+          "type": "object",
+          "properties": {
+            "providerFilter": {
+              "type": "string"
+            },
+            "typeFilter": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "providerFilter",
+            "typeFilter"
+          ]
+        },
+        "vaultGlobalConfiguration": {
+          "type": "object",
+          "properties": {
+            "skipSslVerification": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "skipSslVerification"
+          ]
+        }
+      },
+      "required": [
+        "configuration",
+        "vaultGlobalConfiguration"
+      ]
+    },
+    "aws": {
+      "type": "object",
+      "properties": {
+        "awsCredentials": {
+          "type": "object"
+        },
+        "s3": {
+          "type": "object",
+          "properties": {
+            "disableSessionToken": {
+              "type": "boolean"
+            },
+            "useHttp": {
+              "type": "boolean"
+            },
+            "usePathStyleUrl": {
+              "type": "boolean"
+            },
+            "useTransferAcceleration": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "disableSessionToken",
+            "useHttp",
+            "usePathStyleUrl",
+            "useTransferAcceleration"
+          ]
+        }
+      },
+      "required": [
+        "awsCredentials",
+        "s3"
+      ]
+    },
+    "appearance": {
+      "type": "object",
+      "properties": {
+        "consoleUrlProvider": {
+          "type": "object"
+        },
+        "prism": {
+          "type": "object",
+          "properties": {
+            "theme": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "theme"
+          ]
+        }
+      },
+      "required": [
+        "consoleUrlProvider",
+        "prism"
+      ]
+    },
+    "security": {
+      "type": "object",
+      "properties": {
+        "anonymizeSupportBundle": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "enabled"
+          ]
+        },
+        "apiToken": {
+          "type": "object",
+          "properties": {
+            "creationOfLegacyTokenEnabled": {
+              "type": "boolean"
+            },
+            "tokenGenerationOnCreationEnabled": {
+              "type": "boolean"
+            },
+            "usageStatisticsEnabled": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "creationOfLegacyTokenEnabled",
+            "tokenGenerationOnCreationEnabled",
+            "usageStatisticsEnabled"
+          ]
+        },
+        "apiTokenProperty": {
+          "type": "object"
+        },
+        "contentSecurityPolicy": {
+          "type": "object",
+          "properties": {
+            "enforce": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "enforce"
+          ]
+        },
+        "cps": {
+          "type": "object",
+          "properties": {
+            "hideSandbox": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "hideSandbox"
+          ]
+        },
+        "crumb": {
+          "type": "object"
+        },
+        "gitHooks": {
+          "type": "object",
+          "properties": {
+            "allowedOnAgents": {
+              "type": "boolean"
+            },
+            "allowedOnController": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "allowedOnAgents",
+            "allowedOnController"
+          ]
+        },
+        "gitHostKeyVerificationConfiguration": {
+          "type": "object",
+          "properties": {
+            "sshHostKeyVerificationStrategy": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "sshHostKeyVerificationStrategy"
+          ]
+        },
+        "operationsCenterSecurityInfo": {
+          "type": "object"
+        },
+        "prism": {
+          "type": "object",
+          "properties": {
+            "protectSourceCodeByPermission": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "protectSourceCodeByPermission"
+          ]
+        },
+        "queueItemAuthenticator": {
+          "type": "object"
+        },
+        "scriptApproval": {
+          "type": "object",
+          "properties": {
+            "forceSandbox": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "forceSandbox"
+          ]
+        }
+      },
+      "required": [
+        "anonymizeSupportBundle",
+        "apiToken",
+        "apiTokenProperty",
+        "contentSecurityPolicy",
+        "cps",
+        "crumb",
+        "gitHooks",
+        "gitHostKeyVerificationConfiguration",
+        "operationsCenterSecurityInfo",
+        "prism",
+        "queueItemAuthenticator",
+        "scriptApproval"
+      ]
+    },
+    "unclassified": {
+      "type": "object",
+      "properties": {
+        "administrativeMonitorsConfiguration": {
+          "type": "object"
+        },
+        "alerter": {
+          "type": "object"
+        },
+        "artifactManager": {
+          "type": "object"
+        },
+        "buildDiscarders": {
+          "type": "object",
+          "properties": {
+            "configuredBuildDiscarders": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "configuredBuildDiscarders"
+          ]
+        },
+        "bundleUpdateTiming": {
+          "type": "object",
+          "properties": {
+            "automaticReload": {
+              "type": "boolean"
+            },
+            "automaticRestart": {
+              "type": "boolean"
+            },
+            "rejectWarnings": {
+              "type": "boolean"
+            },
+            "reloadAlwaysOnRestart": {
+              "type": "boolean"
+            },
+            "skipNewVersions": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "automaticReload",
+            "automaticRestart",
+            "rejectWarnings",
+            "reloadAlwaysOnRestart",
+            "skipNewVersions"
+          ]
+        },
+        "casCGlobalConfig": {
+          "type": "object"
+        },
+        "cascItemsConfiguration": {
+          "type": "object",
+          "properties": {
+            "variableInterpolationEnabledForAdmin": {
+              "type": "boolean"
+            },
+            "variableInterpolationEnabledForNonAdmin": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "variableInterpolationEnabledForAdmin",
+            "variableInterpolationEnabledForNonAdmin"
+          ]
+        },
+        "cloudBeesSCMReporting": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "enabled"
+          ]
+        },
+        "cloudbeesPipelineExplorer": {
+          "type": "object",
+          "properties": {
+            "autoPollingEnabled": {
+              "type": "boolean"
+            },
+            "autoPollingIntervalSeconds": {
+              "type": "integer"
+            },
+            "enabled": {
+              "type": "boolean"
+            },
+            "pluggableStorageEnabled": {
+              "type": "boolean"
+            },
+            "searchMaxIndexSize": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "autoPollingEnabled",
+            "autoPollingIntervalSeconds",
+            "enabled",
+            "pluggableStorageEnabled",
+            "searchMaxIndexSize"
+          ]
+        },
+        "cloudbeesPlatform": {
+          "type": "object"
+        },
+        "computerRetentionCheckInterval": {
+          "type": "object"
+        },
+        "configuration": {
+          "type": "object"
+        },
+        "defaultDisplayUrlProvider": {
+          "type": "object"
+        },
+        "defaultFolderConfiguration": {
+          "type": "object"
+        },
+        "defaultView": {
+          "type": "object"
+        },
+        "email-ext": {
+          "type": "object",
+          "properties": {
+            "adminRequiredForTemplateTesting": {
+              "type": "boolean"
+            },
+            "allowUnregisteredEnabled": {
+              "type": "boolean"
+            },
+            "charset": {
+              "type": "string"
+            },
+            "debugMode": {
+              "type": "boolean"
+            },
+            "defaultAttachBuildLog": {
+              "type": "integer"
+            },
+            "defaultBody": {
+              "type": "string"
+            },
+            "defaultSubject": {
+              "type": "string"
+            },
+            "defaultTriggerIds": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "mailAccount": {
+              "type": "object"
+            },
+            "maxAttachmentSize": {
+              "type": "integer"
+            },
+            "maxAttachmentSizeMb": {
+              "type": "integer"
+            },
+            "precedenceBulk": {
+              "type": "boolean"
+            },
+            "throttlingEnabled": {
+              "type": "boolean"
+            },
+            "watchingEnabled": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "adminRequiredForTemplateTesting",
+            "allowUnregisteredEnabled",
+            "charset",
+            "debugMode",
+            "defaultAttachBuildLog",
+            "defaultBody",
+            "defaultSubject",
+            "defaultTriggerIds",
+            "mailAccount",
+            "maxAttachmentSize",
+            "maxAttachmentSizeMb",
+            "precedenceBulk",
+            "throttlingEnabled",
+            "watchingEnabled"
+          ]
+        },
+        "envVarsFilter": {
+          "type": "object"
+        },
+        "experimentalPlugins": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "enabled"
+          ]
+        },
+        "fingerprints": {
+          "type": "object",
+          "properties": {
+            "fingerprintCleanupDisabled": {
+              "type": "boolean"
+            },
+            "storage": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "fingerprintCleanupDisabled",
+            "storage"
+          ]
+        },
+        "gitHubConfiguration": {
+          "type": "object",
+          "properties": {
+            "apiRateLimitChecker": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "apiRateLimitChecker"
+          ]
+        },
+        "gitHubPluginConfig": {
+          "type": "object",
+          "properties": {
+            "hookUrl": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "hookUrl"
+          ]
+        },
+        "globalCloudBeesPipelineTemplateCatalog": {
+          "type": "object"
+        },
+        "globalConfigFiles": {
+          "type": "object"
+        },
+        "globalConfigurationImpl": {
+          "type": "object"
+        },
+        "globalDefaultFlowDurabilityLevel": {
+          "type": "object"
+        },
+        "globalLibraries": {
+          "type": "object"
+        },
+        "globalUntrustedLibraries": {
+          "type": "object"
+        },
+        "headerLabel": {
+          "type": "object"
+        },
+        "headerSupportRequestLink": {
+          "type": "object"
+        },
+        "inactiveItemsConfiguration": {
+          "type": "object",
+          "properties": {
+            "analysisEnabled": {
+              "type": "boolean"
+            },
+            "analysisFrequencyInDays": {
+              "type": "integer"
+            },
+            "daysBeforeConsideredInactive": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "analysisEnabled",
+            "analysisFrequencyInDays",
+            "daysBeforeConsideredInactive"
+          ]
+        },
+        "junitTestResultStorage": {
+          "type": "object",
+          "properties": {
+            "storage": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "storage"
+          ]
+        },
+        "location": {
+          "type": "object",
+          "properties": {
+            "adminAddress": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "adminAddress",
+            "url"
+          ]
+        },
+        "mailer": {
+          "type": "object",
+          "properties": {
+            "charset": {
+              "type": "string"
+            },
+            "useSsl": {
+              "type": "boolean"
+            },
+            "useTls": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "charset",
+            "useSsl",
+            "useTls"
+          ]
+        },
+        "metricsAccessKey": {
+          "type": "object"
+        },
+        "myView": {
+          "type": "object"
+        },
+        "nodeProperties": {
+          "type": "object"
+        },
+        "plugin": {
+          "type": "object"
+        },
+        "pollSCM": {
+          "type": "object",
+          "properties": {
+            "pollingThreadCount": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "pollingThreadCount"
+          ]
+        },
+        "projectNamingStrategy": {
+          "type": "object"
+        },
+        "provisioningLimitConfiguration": {
+          "type": "object"
+        },
+        "proxyConfigurationManager": {
+          "type": "object"
+        },
+        "quietPeriod": {
+          "type": "object"
+        },
+        "resourceRoot": {
+          "type": "object"
+        },
+        "scmGit": {
+          "type": "object",
+          "properties": {
+            "addGitTagAction": {
+              "type": "boolean"
+            },
+            "allowSecondFetch": {
+              "type": "boolean"
+            },
+            "createAccountBasedOnEmail": {
+              "type": "boolean"
+            },
+            "disableGitToolChooser": {
+              "type": "boolean"
+            },
+            "hideCredentials": {
+              "type": "boolean"
+            },
+            "showEntireCommitSummaryInChanges": {
+              "type": "boolean"
+            },
+            "useExistingAccountWithSameEmail": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "addGitTagAction",
+            "allowSecondFetch",
+            "createAccountBasedOnEmail",
+            "disableGitToolChooser",
+            "hideCredentials",
+            "showEntireCommitSummaryInChanges",
+            "useExistingAccountWithSameEmail"
+          ]
+        },
+        "scmRetryCount": {
+          "type": "object"
+        },
+        "shell": {
+          "type": "object"
+        },
+        "usageStatistics": {
+          "type": "object"
+        },
+        "usageStatisticsCloudBees": {
+          "type": "object",
+          "properties": {
+            "disabledJenkinsUsageStatistics": {
+              "type": "boolean"
+            },
+            "usageStatisticsCollected": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "disabledJenkinsUsageStatistics",
+            "usageStatisticsCollected"
+          ]
+        },
+        "validationVisualization": {
+          "type": "object",
+          "properties": {
+            "quiet": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "quiet"
+          ]
+        },
+        "viewsTabBar": {
+          "type": "object"
+        },
+        "workspaceCache": {
+          "type": "object",
+          "properties": {
+            "cacheManager": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "cacheManager"
+          ]
+        }
+      },
+      "required": [
+        "administrativeMonitorsConfiguration",
+        "alerter",
+        "artifactManager",
+        "buildDiscarders",
+        "bundleUpdateTiming",
+        "casCGlobalConfig",
+        "cascItemsConfiguration",
+        "cloudBeesSCMReporting",
+        "cloudbeesPipelineExplorer",
+        "cloudbeesPlatform",
+        "computerRetentionCheckInterval",
+        "configuration",
+        "defaultDisplayUrlProvider",
+        "defaultFolderConfiguration",
+        "defaultView",
+        "email-ext",
+        "envVarsFilter",
+        "experimentalPlugins",
+        "fingerprints",
+        "gitHubConfiguration",
+        "gitHubPluginConfig",
+        "globalCloudBeesPipelineTemplateCatalog",
+        "globalConfigFiles",
+        "globalConfigurationImpl",
+        "globalDefaultFlowDurabilityLevel",
+        "globalLibraries",
+        "globalUntrustedLibraries",
+        "headerLabel",
+        "headerSupportRequestLink",
+        "inactiveItemsConfiguration",
+        "junitTestResultStorage",
+        "location",
+        "mailer",
+        "metricsAccessKey",
+        "myView",
+        "nodeProperties",
+        "plugin",
+        "pollSCM",
+        "projectNamingStrategy",
+        "provisioningLimitConfiguration",
+        "proxyConfigurationManager",
+        "quietPeriod",
+        "resourceRoot",
+        "scmGit",
+        "scmRetryCount",
+        "shell",
+        "usageStatistics",
+        "usageStatisticsCloudBees",
+        "validationVisualization",
+        "viewsTabBar",
+        "workspaceCache"
+      ]
+    },
+    "tool": {
+      "type": "object",
+      "properties": {
+        "cloudbeesPluginUsageAnalyzer": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "enabled"
+          ]
+        },
+        "git": {
+          "type": "object",
+          "properties": {
+            "installations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "home": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "home",
+                  "name"
+                ]
+              }
+            }
+          },
+          "required": [
+            "installations"
+          ]
+        },
+        "mavenGlobalConfig": {
+          "type": "object",
+          "properties": {
+            "globalSettingsProvider": {
+              "type": "string"
+            },
+            "settingsProvider": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "globalSettingsProvider",
+            "settingsProvider"
+          ]
+        }
+      },
+      "required": [
+        "cloudbeesPluginUsageAnalyzer",
+        "git",
+        "mavenGlobalConfig"
+      ]
+    }
+  },
+  "required": [
+    "advisor",
+    "appearance",
+    "aws",
+    "beekeeper",
+    "cloudbees-monitoring",
+    "configuration-as-code",
+    "credentials",
+    "globalCloudBeesPipelineTemplateCatalog",
+    "globalCredentialsConfiguration",
+    "jenkins",
+    "kube",
+    "security",
+    "support",
+    "tool",
+    "unclassified"
+  ]
+}
