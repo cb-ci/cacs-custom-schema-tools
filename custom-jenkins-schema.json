@@ -532,7 +532,8 @@
           "type": "object",
           "properties": {
             "sshHostKeyVerificationStrategy": {
-              "type": "string"
+              "type": "string",
+              "const": "knownHostsFileVerificationStrategy"
             }
           },
           "required": [
