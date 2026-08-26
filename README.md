@@ -248,7 +248,6 @@ CloudBees Specific json schemas
 * https://<CONTROLLER_URL>/manage/core-casc-schema-download/download/items.json
 * https://<CONTROLLER_URL>/manage/core-casc-schema-download/download/rbac.json
 * https://<CONTROLLER_URL>/manage/core-casc-schema-download/download/plugin-catalog.json
-* https://<CONTROLLER_URL>/manage/core-casc-schema-download/download/plugin-catalog.json
 
 All CloudBees yaml json schemas
 
